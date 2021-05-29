@@ -1,12 +1,10 @@
-# IITB-SSP-mini
-
 ----------------------------------------------------------------------------------
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 27.05.2021 23:27:54
+-- Create Date: 27.05.2021 22:14:04
 -- Design Name: 
--- Module Name: one_bit_comparator_TB - Behavioral
+-- Module Name: one_bit_comparator - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -33,33 +31,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity one_bit_comparator_TB is
---  Port ( );
-end one_bit_comparator_TB;
+entity one_bit_comparator is
+Port (A, B: in std_logic; O: out std_logic );
+end one_bit_comparator;
 
-architecture Behavioral of one_bit_comparator_TB is
-signal testA, testB: std_logic;
-signal testO: std_logic;
+architecture Behavioral of one_bit_comparator is
+
 begin
-uut: entity work.one_bit_comparator(Behavioral)
-port map(A=>testA, B=>testB, O=>testO);
-process 
-begin
-testA <= '0';
-testB <= '0';
-wait for 20ps;
-
-testA <= '0';
-testB <= '1';
-wait for 20ps;
-
-testA <= '1';
-testB <= '0';
-wait for 20ps;
-
-testA <= '1';
-testB <= '1';
-wait for 20ps;
-end process;
+O <= A and (not B); 
 
 end Behavioral;
