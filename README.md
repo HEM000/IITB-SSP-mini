@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 27.05.2021 22:14:04
+-- Create Date: 27.05.2021 22:03:47
 -- Design Name: 
--- Module Name: one_bit_comparator - Behavioral
+-- Module Name: two_bit_comparator - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,13 +31,20 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity one_bit_comparator is
-Port (A, B: in std_logic; O: out std_logic );
-end one_bit_comparator;
+entity two_bit_comparator is
+-- to find v1 > v2
+ Port (v1, v2: in std_logic_vector (1 downto 0); Oeqb: out std_logic );
+end two_bit_comparator;
 
-architecture Behavioral of one_bit_comparator is
+architecture Behavioral of two_bit_comparator is
+signal e1, e2: std_logic;
 
 begin
-O <= A and (not B); 
+bit_1: entity work.one_bit_comparator(Behavioral)
+port map(A=>v1(1), B=>v2(1), O=>e1);
+bit_2: entity work.one_bit_comparator(Behavioral)
+port map(A=>v1(0), B=>v2(0), O=>e2);
+
+Oeqb <= e1 or (e2 and (v1(1) xnor v2(1)));
 
 end Behavioral;
