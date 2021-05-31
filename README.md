@@ -1,2 +1,2 @@
 # IITB-SSP-mini-practice
-Practice Codes for Mini projects at SATLAB!
+Practice Codes for Mini Project at SATLAB!
