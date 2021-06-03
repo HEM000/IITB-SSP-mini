@@ -1,0 +1,59 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 04.06.2021 04:11:38
+-- Design Name: 
+-- Module Name: four_bit_counter_TB - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity four_bit_counter_TB is
+--  Port ( );
+end four_bit_counter_TB;
+
+architecture Behavioral of four_bit_counter_TB is
+signal clk_test:  std_logic;
+signal a_test, b_test, c_test, d_test: std_logic;
+constant clk_period: time := 10ns;
+
+begin
+uut: entity work.four_bit_counter(Behavioral)
+port map(clk => clk_test,
+         a => a_test,
+         b => b_test,
+         c => c_test,
+         d => d_test);
+
+clock:process
+begin
+clk_test <= '1';
+wait for clk_period/2;
+clk_test <= '0';
+wait for clk_period/2;
+end process;
+
+end Behavioral;
