@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02.06.2021 22:17:57
+-- Create Date: 03.06.2021 01:39:42
 -- Design Name: 
--- Module Name: r_e_d - Behavioral
+-- Module Name: r_e_d_TB - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,48 +31,45 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity r_e_d is
- Port (clk: in std_logic := '0';
- reset: in std_logic;
- level: in std_logic;
- tick: out std_logic);
-end r_e_d;
+entity r_e_d_TB is
+--  Port ( );
+end r_e_d_TB;
 
-architecture Behavioral of r_e_d is
-type state_type is (zero, edge, one);
-signal state_reg, state_next: state_type;
+architecture Behavioral of r_e_d_TB is
+constant clock_period: time := 10ns;
+constant level_period: time := 14ns;
+signal clk_test:  std_logic := '0';
+signal reset_test: std_logic:= '0';
+signal level_test: std_logic :='0';
+signal tick_test:std_logic;
+
+ 
+
+
 begin
-process(clk, reset)
+uut: entity work.r_e_d(Behavioral)
+port map(clk=>clk_test,
+         reset=>reset_test,
+         level=>level_test,
+         tick=>tick_test);
+
+         
+clock: process
 begin
-if (reset = '1') then 
-state_reg <= zero;
-elsif (clk'event and clk = '1') then
-state_reg <= state_next;
+if reset_test = '0' then
+clk_test <= '0';
+wait for clock_period/2;
+clk_test <= '1';
+wait for clock_period/2;
 end if;
+end process clock;
+
+level_variation: process
+begin
+level_test <= '0';
+wait for level_period/2;
+level_test <= '1';
+wait for level_period/2;
 end process;
-
-process(state_reg,level)
-begin
-state_next <= state_reg;
-tick <= '0';
-case state_reg is 
-when zero=>
-if level = '1' then
-state_next <= edge;
-end if;
-when edge=>
-tick <= '1';
-if level= '1' then
-state_next <= one;
-else
-state_next <= zero;
-end if;
-when one =>
-if level = '0' then
-state_next <= zero;
-end if;
-end case;
-end process;
-
-
+ 
 end Behavioral;
