@@ -1,0 +1,97 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 05.06.2021 02:05:44
+-- Design Name: 
+-- Module Name: sequence_detector_TB - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity sequence_detector_TB is
+--  Port ( );
+end sequence_detector_TB;
+
+architecture Behavioral of sequence_detector_TB is
+signal clk_test: std_logic;
+signal reset_test: std_logic;
+signal sequence_test: std_logic;
+signal detector_test: std_logic;
+constant clock_period: time := 32ns;
+constant sequence_period: time := 34ns;
+
+
+begin
+uut: entity work.sequence_detector(Behavioral)
+port map(clk => clk_test,
+         reset => reset_test,
+         sequence => sequence_test,
+         detector => detector_test);
+         
+clock: process
+begin
+clk_test <= '0';
+wait for clock_period/2;
+clk_test <= '1';
+wait for clock_period/2;
+end process;
+
+sequence_generator: process
+begin
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+sequence_test <= '0';
+wait for sequence_period/2;
+sequence_test <= '1';
+wait for sequence_period/2;
+end process;
+end Behavioral;
