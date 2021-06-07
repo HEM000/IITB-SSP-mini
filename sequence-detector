@@ -64,6 +64,7 @@ state_next <= A;
 end if;
 
 when A=>
+detector <= '0';
 if sequence = '1' then
 state_next <= B;
 else 
@@ -71,11 +72,13 @@ state_next<= default;
 end if;
 
 when B =>
+detector <= '0';
 if sequence = '0' then
 state_next <= C;
 end if;
 
 when C=> 
+detector <= '0';
 if sequence = '1' then
 state_next <= D;
 else 
